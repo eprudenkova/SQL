@@ -1,0 +1,33 @@
+2021-02-07
+Class 4
+
+USE syntaxhrm_mysql1;
+
+select * from hs_hr_employees;
+
+-- Self-Join
+-- create 2 copies of the same table fetch the info of employee from one copy and
+-- the info og the manager from second copy
+-- and join these two tables based on the superviser
+select emp1.emp_firstname,emp1.emp_lastname,emp1.erep_sup_emp_number, emp2.emp_firstname,emp2.emp_lastname
+from hs_hr_employees emp1,hs_hr_employees emp2
+where emp1.erep_sup_emp_number is not null and emp1.emp_number= emp2.erep_sup_emp_number;
+
+select emp_number,emp_firstname,emp_lastname,erep_sup_emp_number from hs_hr_employees where erep_sup_emp_number is not null;
+
+-- combine in single column
+-- UNION: only keeps unique records. Use ONLY for 2 different tables.
+select emp_lastname from hs_hr_employees
+union
+select eec_name from hs_hr_emp_emergency_contacts;
+
+--  UNION ALL: keeps all records, including duplicates. Use ONLY for 2 different tables.
+select emp_firstname, emp_lastname from hs_hr_employees
+union all
+select eec_name from hs_hr_emp_emergency_contacts;
+
+-- INTERSECT: Takes the data from both result sets which are in common.
+-- EXCEPT: Takes the data from the first result set, but not in the second result set (i.e. no matching to each other)
+-- MINUS
+
+delete from hs_hr_employees where emp_lastname='Smith';

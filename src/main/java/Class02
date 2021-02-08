@@ -1,0 +1,27 @@
+2021-02-04
+Class 2
+
+-- How to display information about employees who do not have assign job titles?
+SELECT * FROM hs_hr_employees WHERE job_title_code is NUll;
+-- How to find employees first name, last name that do not have home phone number
+-- and display first names in alphabetical order.
+SELECT emp_firstname,emp_lastname FROM hs_hr_employees WHERE emp_hm_telephone is NULL Order by emp_firstname Asc;
+-- How to display about all employees whose DOB has been entered.
+-- We want to see employees sorted by last name from Z-A?
+SELECT * FROM hs_hr_employees WHERE emp_birthday is not Null Order by emp_lastname Desc;
+-- Display all employees whose last name ends with ‘a’.
+SELECT * FROM hs_hr_employees WHERE emp_lastname Like '%a';
+-- Display all HRMS offices except those located in US, Canada and Brazil.
+SELECT * FROM ohrm_location WHERE country_code <>'US' AND country_code <>'CA' AND country_code <>'BR';
+-- Verify all employees who was born from January 1st of 1980 until December 31st of 2000.
+SELECT * FROM hs_hr_employees WHERE emp_birthday BETWEEN '1980-01-01' AND '2000-12-31';
+-- Display all nationalities that start with ‘C’?
+SELECT * FROM ohrm_nationality WHERE name Like 'C%';
+-- Display all employees whose birthday is in August and do not forget to sort employee’s last name from A-Z.
+SELECT * FROM hs_hr_employees WHERE emp_birthday LIKE '%-08-%';
+-- Verify all the employees who are managers.
+SELECT * FROM ohrm_job_title WHERE job_title LIKE '%manager%' AND is_deleted=0;
+SELECT * FROM hs_hr_employees WHERE job_title_code in(3,6,7,14,15,18,27,30);
+-- How to display first name, last name, dob of employees who is a Freelancer or developer.
+SELECT * FROM ohrm_job_title WHERE is_deleted=0 AND job_title LIKE '%freelancer%' OR job_title LIKE '%developer%';
+SELECT emp_firstname,emp_lastname,emp_birthday FROM hs_hr_employees WHERE job_title_code in(9,10,31);
